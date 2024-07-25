@@ -53,7 +53,7 @@ int sum = s1.grade + s2.grade; // 값을 꺼내 계산함
 
 <br>
 
-## 2. 변수 대입
+## 3. 변수 대입
 
 #### 💡 자바는 항상 변수의 값을 복사해서 대입한다.!!
 
@@ -94,7 +94,7 @@ s1, s2 모두 같은 주소값인 a09ee92를 바라보게 된다.
 
 ### 1) 기본형 메서드 호출
 
-메서드로 기본형 데이터를 전달하면 해당 값이 복사되어 전달된다.
+메서드로 기본형 데이터를 전달하면 **해당 값** 이 복사되어 전달된다.
 이 경우, 메서드 내부에서 매개변수(파라미터)의 값을 변경해도 호출자의 변수 값에는 영향이 없다.
 
 ```JAVA
@@ -115,7 +115,7 @@ a = 10
 
 ### 2) 참조형 메서드 호출
 
-메서드로 참조형 데이터를 전달하면 참조값(주소값)이 복사되어 전달된다.
+메서드로 참조형 데이터를 전달하면 **참조값(주소값)** 이 복사되어 전달된다.
 이 경우, 메서드 내부에서 매개변수(파라미터)로 전달된 객체의 값을 변경하면 호출자의 객체도 변경된다.
 
 ```JAVA
@@ -139,5 +139,108 @@ void changeGrade(Student studentS) { // 1. studentS = ref.Student@a09ee92 (stude
    
 결과
 s1.grade = 90
+
+<br>
+
+## 4. 변수와 초기화
+### 1) 변수의 종류
+- 멤버 변수(필드)
+  - 클래스에 선언
+
+  #### 예시
+  ```JAVA
+  public class Student {
+    String name; // 멤버 번수(필드)
+    int age; // 멤버 변수(필드)
+    int grade;  // 멤버 번수(필드)
+  }
+  ```
+  
+- 지역 변수
+  - 메서드에 선언 (메서드가 끝나면 제거됨)
+  - 특정 지역에서만 사용되는 변수
+  - 매개변수도 지역 변수의 한 종류
+
+  #### 예시
+  ```JAVA
+   public class StudentMain {
+       public static void main(String[] args) {
+           int a = 1; // 지역 변수
+           Student student1; // 지역 변수
+           student1 = new Student();
+           Student student2 = new Student(); // 지역변수
+    }
+  }
+  ```
+
+### 2) 변수의 값 초기화
+- 멤버 번수(필드) : 자동 초기화
+  - 인스턴스를 생성할 때 자동으로 초기화된다.
+  ex) `int = 0`, `boolean = false`, `참조형 = null`
+  - 개발자가 초기값 직접 지정 가능
+  ```
+  public class Student {
+    String name; // 초기화 안했으므로 null로 초기화 됨
+    int age; // 초기화 안했으므로 0으로 초기화 됨
+    int grade = 90;  // 90으로 직접 초기화
+  }
+  ```
+    
+- 지역 변수 : 수동 초기화
+  - 개발자가 항상 직접 초기화해야 한다.
+  ```JAVA
+   public class StudentMain {
+       public static void main(String[] args) {
+           Student student = new Student();
+           System.out.println(student.name); // null
+           System.out.println(student.age); // 0
+           System.out.println(student.grade); // 90
+    }
+  }
+  ```
+
+### 3) null
+멤버 번수(필드)의 참조형 변수는 `null`로 초기화 한다고 하였다.
+#### `null`은 아직 가리키는 대상이 없다, 존재하지 않는, 혹은 없다는 뜻이다.
+```JAVA
+public class Data {
+  int value;
+}
+```
+
+#### 예시
+아래와 같은 코드가 있다.
+```JAVA
+   public class DataMain {
+       public static void main(String[] args) {
+           Data data = null; // 1.
+           data = new Data(); // 2.
+    }
+  }
+```
+
+한줄한줄 자세히 살펴보며 메모리에 어떻게 적재되는지 살펴보자.
+
+1. ```JAVA
+   Data data = null;
+   ```
+   1. Data라는 타입을 가진 객체의 이름을 data로 선언
+   2. data의 객체에 null 값으로 초기화
+
+<img src="https://github.com/user-attachments/assets/6fe437ce-8052-4893-9164-8edb11e4587f" width="30%" />
+
+2. ```JAVA
+   data = new Data();
+   ```
+   1. data의 타입을 가진 참조형 변수에 Data 인스턴스 지정
+   2. data는 참조형 변수이므로, data에는 데이터에 접근하기 위한 Data 인스턴스의 참조(주소)값을 저장 // 참조(주소)값 예시: @a09ee92)
+   3. Data 안에는 value가 있다. (value는 자동 초기화로 인해 0으로 초기화 됨)
+
+  <img src="https://github.com/user-attachments/assets/d23fcca1-aeca-4c03-8ae5-95dcb9ae660b" width="30%" />
+
+
+
+
+
 
 
