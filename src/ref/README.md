@@ -267,3 +267,29 @@ data에 null을 할당하면서 data는 Data의 인스턴스의 참조를 해제
 그래서 ref.Data@a09ee92 참조값을 가지는 Data 인스턴스는 JVM의 GC에 의해 제거되었다.
 
 ### 4) NullPointerException
+만약 참조값 없이 객체를 찾아가면 어떤 문제가 발생할까? 이 경우 `NullPointerException` 이라는 예외가 발생한다.
+`NullPointerException` 은 이름 그대로 `null` 을 가리키다(Pointer)라는 의미이다. **`null` 은 없다는 뜻이므로, 결국 주소가 없는 곳을 찾아갈 때 발생하는 예외이다.**
+
+참조형 변수에 `.` (dot)을 사용하면 해당 객체를 찾아갈 수 있다. 만약 참조형 변수가 `null`을 가리킨다면 값이 없다는 뜻이므로, 찾아갈 수 있는 객체(인스턴스)가 없다.
+`NullPointerException` 은 이처럼 `null` 에 `.` (dot)을 찍었을 때 발생한다.
+
+#### 예시
+아래와 같은 코드가 있다.
+```JAVA
+   public class DataMain {
+       public static void main(String[] args) {
+           Data data = null;
+           System.out.println("data.value = " + data.value); // NullPointerException
+    }
+  }
+```
+
+위에서 data는 null을 할당받은 참조형 변수이다. null 값에 value 객체를 꺼내려고 하니 `NullPointerException` 예외가 발생하고, 프로그램이 종료된다.
+
+결과
+```
+Exception in thread "main" java.lang.NullPointerException: Cannot read field "value1" because "data" is null
+	at ref.initMain.main(initMain.java:8) // NullPointerException 발생
+
+Process finished with exit code 1 // 프로그램 종료
+```
