@@ -215,6 +215,7 @@ public class Data {
        public static void main(String[] args) {
            Data data = null; // 1.
            data = new Data(); // 2.
+           data = null; // 3.
     }
   }
 ```
@@ -222,25 +223,47 @@ public class Data {
 한줄한줄 자세히 살펴보며 메모리에 어떻게 적재되는지 살펴보자.
 
 1. ```JAVA
-   Data data = null;
+   Data data = null; // null
    ```
    1. Data라는 타입을 가진 객체의 이름을 data로 선언
    2. data의 객체에 null 값으로 초기화
 
-<img src="https://github.com/user-attachments/assets/6fe437ce-8052-4893-9164-8edb11e4587f" width="30%" />
+    <br>
+    <img src="https://github.com/user-attachments/assets/6fe437ce-8052-4893-9164-8edb11e4587f" width="30%" />
 
 2. ```JAVA
-   data = new Data();
+   data = new Data(); // ref.Data@a09ee92 (data 주소값 예시)
    ```
    1. data의 타입을 가진 참조형 변수에 Data 인스턴스 지정
    2. data는 참조형 변수이므로, data에는 데이터에 접근하기 위한 Data 인스턴스의 참조(주소)값을 저장 // 참조(주소)값 예시: @a09ee92)
    3. Data 안에는 value가 있다. (value는 자동 초기화로 인해 0으로 초기화 됨)
 
-  <img src="https://github.com/user-attachments/assets/d23fcca1-aeca-4c03-8ae5-95dcb9ae660b" width="30%" />
+    <br>
+    <img src="https://github.com/user-attachments/assets/d23fcca1-aeca-4c03-8ae5-95dcb9ae660b" width="30%" />
 
+3. ```JAVA
+   data = null; // null
+   ```
 
+   1. data가 기존에 참조하고 있던 Data 인스턴스를 참조 해제 **(⭐️ data는 더이상 Data 인스턴스를 참조하지 않는다. ⭐️)**
+   2. data의 객체에 null 할당
+  
+   <br>
+   <img src="https://github.com/user-attachments/assets/2953903e-9b9c-4344-95d1-e743b3187731" width="30%" />
 
+#### Garbage Collection : 쓰레기 수집기
 
+<img src="https://github.com/user-attachments/assets/3f39a6a2-7c21-4761-abf0-8a3a1d00776e" width="30%" />
 
+위 3번에서 data는 더이상 Data 인스턴스를 참조하지 않는다고 하였다. 
 
+이 부분을 자세히 들여다보자.
+data에 null을 할당하면서 data는 Data의 인스턴스의 참조를 해제하였다. 
+이렇게 아무것도 참조하지 않게 되면 Data의 인스턴스는 갈 길을 잃었다...🥲🥲
 
+자바에서 객체는 해당 객체를 참조하는 곳이 있으면 JVM이 종료할 때까지 계속 생존한다.
+그런데 중간에 **⭐️해당 객체를 참조하는 곳이 모두 사라지면 그떄 JVM은 필요 없는 객체로 판단하고 GC(Grabage Collection)를 사용해서 제거한다.⭐️** 
+
+그래서 ref.Data@a09ee92 참조값을 가지는 Data 인스턴스는 JVM의 GC에 의해 제거되었다.
+
+### 4) NullPointerException
