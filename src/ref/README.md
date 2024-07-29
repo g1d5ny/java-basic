@@ -26,27 +26,29 @@ ex) `String`, `객체`, `배열`
 <br>
 
 ## 2. 계산
-### 1) 기본형은 들어있는 값을 그대로 계산에 사용 가능
+### 1) 기본형
+기본형은 들어있는 값을 그대로 계산에 사용 가능
 ```JAVA
 int a = 10, b = 20;
 int sum = a + b;
 ```
-### 2) 참조형은 들어있는 `참조값`을 그대로 사용 불가
+### 2) 참조형
+참조형은 들어있는 `참조값`을 그대로 사용 불가
 주소지만 가지고는 할 수 있는게 없음.
 
 ```JAVA
 Student s1 = new Student(); // s1 = ref.Student@a09ee92 (s1에는 주소값이 존재)
 Student s2 = new Student(); // s2 = ref.Student@30f39991 (s2에는 주소값이 존재)
-System.out.println(s1 + s2); // ref.Student@a09ee92ref.Student@a09ee92 (계산할 값이 없음. 참조값 붙여 출력)
+System.out.println(s1 + s2); // error
 ```
 
 값은 주소지에 가야 확인할 수 있다.
  ```JAVA
 Student s1 = new Student();
-s1.grade = 100; // 값 확인
+s1.grade = 100; // 값 지정
 
 Student s2 = new Student();
-s2.grade = 90; // 값 확인
+s2.grade = 90; // 값 지정
 
 int sum = s1.grade + s2.grade; // 값을 꺼내 계산함
 ```
@@ -59,7 +61,7 @@ int sum = s1.grade + s2.grade; // 값을 꺼내 계산함
 
 자바에서 변수에 값을 대입하는 것은 변수에 들어있는 값을 복사해서 대입하는 것이다.
 
-### 1) 기본형 대입
+### 1) 기본형
 - 변수에 들어있는 실제 사용하는 값을 복사하여 대입한다.
 
 ```JAVA
@@ -71,7 +73,7 @@ int b = a; // b에 a의 값인 10을 복사해서 대입.
 
 <img src="https://github.com/user-attachments/assets/03f284db-e8fc-4902-a265-ea335768c35d" width="50%"/>
 
-### 2) 참조형 대입
+### 2) 참조형
 - 실제 사용하는 객체가 아니라 객체의 위치를 가리키는 참조값(주소값)을 복사하여 대입
 
 ```JAVA
