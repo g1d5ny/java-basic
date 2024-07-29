@@ -36,7 +36,7 @@ int sum = a + b;
 
 ```JAVA
 Student s1 = new Student(); // s1 = ref.Student@a09ee92 (s1에는 주소값이 존재)
-Student s2 = new Student(); // s2 = ref.Student@a09ee92 (s2에는 주소값이 존재)
+Student s2 = new Student(); // s2 = ref.Student@30f39991 (s2에는 주소값이 존재)
 System.out.println(s1 + s2); // ref.Student@a09ee92ref.Student@a09ee92 (계산할 값이 없음. 참조값 붙여 출력)
 ```
 
